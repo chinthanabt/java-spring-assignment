@@ -8,7 +8,7 @@ following:
 	Example of Strings: "abc", "an", "", "apple", "bcd", "", "jk"
 
 	
-Answer located in the com.neurogine.assesment.apidoc.streams.StreamTest class
+Answer located in the com.neurogine.assesment.streams.StreamTest class
 
 
 ##########################Question Two##########################
@@ -22,6 +22,5 @@ Answer located in the com.neurogine.assesment.aspect.MerchantServiceInterceptor 
 ##########################Question Three##########################
 Answer is the product-management-service entire application
 
-
-##########################Question Three##########################
+#Swagger API DOC
 http://ec2-44-211-205-98.compute-1.amazonaws.com:8847/swagger-ui.html

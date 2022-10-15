@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.neurogine.assesment.apidoc.streams.StreamTest;
+import com.neurogine.assesment.streams.StreamTest;
 
 @SpringBootApplication
 public class AssesmentApplication {

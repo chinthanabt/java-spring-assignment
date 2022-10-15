@@ -1,4 +1,4 @@
-package com.neurogine.assesment.apidoc.streams;
+package com.neurogine.assesment.streams;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
