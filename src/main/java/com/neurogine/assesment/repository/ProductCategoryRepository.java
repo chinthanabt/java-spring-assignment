@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.neurogine.assesment.domain.entity.ProductCategory;
 
 public interface ProductCategoryRepository extends CrudRepository<ProductCategory, Long>{
-	Optional<ProductCategory> findById(UUID id);
+	Optional<ProductCategory> findById(long id);
 	
 	List<ProductCategory> findAll();
 }

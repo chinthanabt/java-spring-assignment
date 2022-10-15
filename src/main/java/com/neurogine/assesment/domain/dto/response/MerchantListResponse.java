@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MerchantListResponse {
-	private String name;
+	private long name;
 	
 	private String email;
 	

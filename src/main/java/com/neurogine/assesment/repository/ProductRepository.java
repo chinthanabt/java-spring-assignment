@@ -11,7 +11,7 @@ import com.neurogine.assesment.domain.entity.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, UUID> {	
-	Optional<Product> findById(UUID id);
+	Optional<Product> findById(long id);
 	
 	List<Product> findAll();
 }

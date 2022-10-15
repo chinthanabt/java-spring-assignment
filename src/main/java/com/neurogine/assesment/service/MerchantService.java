@@ -1,10 +1,7 @@
 package com.neurogine.assesment.service;
 
-import static com.neurogine.assesment.utils.CommonUtils.covertStringToUUID;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +34,12 @@ public class MerchantService {
 		merchantRepository.save(merchant);
 	}
 
-	public void deleteMerchant(String merchantId) {		
-		Merchant merchant = getMerchantById(covertStringToUUID(merchantId));
+	public void deleteMerchant(long merchantId) {		
+		Merchant merchant = getMerchantById(merchantId);
 		merchantRepository.delete(merchant);
 	}
 
-	public Merchant getMerchantById(UUID merchantId) {
+	public Merchant getMerchantById(long merchantId) {
 		return merchantRepository.findById(merchantId)
 				.orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.MERCHANT_NOT_FOUND.getMessage(),
 						Constant.Responsecode.MERCHANT_NOT_FOUND.getCode()));

@@ -1,7 +1,5 @@
 package com.neurogine.assesment.service;
 
-import static com.neurogine.assesment.utils.CommonUtils.covertStringToUUID;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -25,6 +23,12 @@ import com.neurogine.assesment.repository.ProductCategoryRepository;
 import com.neurogine.assesment.repository.ProductImageRepository;
 import com.neurogine.assesment.repository.ProductRepository;
 
+/**
+ * 
+ * @author Chinthana
+ *
+ */
+
 @Service
 public class ProductService {
 
@@ -41,7 +45,7 @@ public class ProductService {
 		Product product = new Product();
 		BeanUtils.copyProperties(productCreateRequest, product);
 
-		ProductCategory category = productCategoryRepository.findById(covertStringToUUID(productCreateRequest.getCategory()))
+		ProductCategory category = productCategoryRepository.findById(productCreateRequest.getCategory())
 				.orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.CATEGORY_NOT_FOUND.getMessage(),
 						Constant.Responsecode.CATEGORY_NOT_FOUND.getCode()));
 		
@@ -72,13 +76,13 @@ public class ProductService {
 			List<ProductImageResponse> imageList = new ArrayList<>();
 			ProductListResponse product = new ProductListResponse();
 			BeanUtils.copyProperties(s, product);
-			product.setId(s.getId().toString());
+			product.setId(s.getId());
 			product.setCategory(s.getCategory().getName());	
 			
 			s.getImages().forEach( image -> {			
 				ProductImageResponse imageRes = new ProductImageResponse();
 				BeanUtils.copyProperties(image, imageRes);
-				imageRes.setId(image.getId().toString());
+				imageRes.setId(image.getId());
 				imageList.add(imageRes);
 			});
 			
@@ -89,22 +93,40 @@ public class ProductService {
 		return list;
 	}
 	
-	public Product getProductById(String id) {
-		return productRepository.findById(covertStringToUUID(id)).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
+	public Product getProductById(long id) {
+		return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
 				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode()));
 	}
 	
-	public void deleteProductById(String id) {	
-		productRepository.delete(productRepository.findById(covertStringToUUID(id)).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
+	public void deleteProductById(long id) {	
+		productRepository.delete(productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
 				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode())));
 	}
 	
-	public void updateProductById(String id, ProductUpdateRequest productUpdateRequest) {
-		Product product = productRepository.findById(covertStringToUUID(id)).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
+	@Transactional
+	public void updateProductById(long id, ProductUpdateRequest productUpdateRequest) {
+		Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
 				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode()));
 		
-		BeanUtils.copyProperties(productUpdateRequest, product);		
-		productRepository.save(product);		
+		BeanUtils.copyProperties(productUpdateRequest, product);	
+		productRepository.save(product);
+		
+		//Delete previous images
+		productImageRepository.deleteByProduct(product);
+		// save Images
+		productUpdateRequest.getImages().forEach(s -> {
+			try {
+				String imageStr = Base64.getEncoder().encodeToString(s.getBytes());
+				ProductImage image = new ProductImage();
+				image.setContent(imageStr);
+				image.setName(s.getOriginalFilename());
+				image.setProduct(product);
+				productImageRepository.save(image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		});
 	}	
 
 }

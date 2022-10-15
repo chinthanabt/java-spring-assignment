@@ -12,7 +12,7 @@ public class ProductCreateRequest {
 	
 	private String name;
 	
-	private String category;
+	private long category;
 	
 	private double price;
 	

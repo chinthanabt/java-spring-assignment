@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +22,16 @@ import com.neurogine.assesment.domain.dto.response.ProductListResponse;
 import com.neurogine.assesment.domain.entity.Product;
 import com.neurogine.assesment.service.ProductService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+/**
+ * 
+ * @author Chinthana
+ *
+ */
+
+@Api(value = "Product Controller")
 @RestController
 @RequestMapping(value = "/product", produces = { APPLICATION_JSON_VALUE })
 public class ProductController {
@@ -30,30 +39,35 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 
+	@ApiOperation(value = "Create Product")
 	@PostMapping
 	public ResponseEntity<Void> createProduct(@ModelAttribute ProductCreateRequest productCreateRequest) {
 		productService.createProduct(productCreateRequest);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
+	@ApiOperation(value = "List Products")
 	@GetMapping
 	public ResponseEntity<List<ProductListResponse>> listProducts() {
 		return ResponseEntity.ok(productService.getAllProducts());
 	}
-
+	
+	@ApiOperation(value = "View Product By Id")
 	@GetMapping("/{id}")
-	public ResponseEntity<Product> getProductById(@PathVariable String id) {
+	public ResponseEntity<Product> getProductById(@PathVariable long id) {
 		return ResponseEntity.ok(productService.getProductById(id));
 	}
 	
+	@ApiOperation(value = "Delete Product By Id")
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteProductById(@PathVariable String id) {
+	public ResponseEntity<Void> deleteProductById(@PathVariable long id) {
 		productService.deleteProductById(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
+		
+	@ApiOperation(value = "Update Product By Id")
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> updateProductById(@PathVariable String id, @RequestBody ProductUpdateRequest productUpdateRequest) {
+	public ResponseEntity<Void> updateProductById(@PathVariable long id, @ModelAttribute ProductUpdateRequest productUpdateRequest) {
 		productService.updateProductById(id, productUpdateRequest);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

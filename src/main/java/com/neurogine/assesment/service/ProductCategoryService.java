@@ -12,6 +12,13 @@ import com.neurogine.assesment.domain.dto.response.ProductCategoryListResponse;
 import com.neurogine.assesment.domain.entity.ProductCategory;
 import com.neurogine.assesment.repository.ProductCategoryRepository;
 
+
+/**
+ * 
+ * @author Chinthana
+ *
+ */
+
 @Service
 public class ProductCategoryService {
 	
@@ -30,7 +37,7 @@ public class ProductCategoryService {
 		productCategoryRepository.findAll().forEach( s -> {
 			ProductCategoryListResponse category = new ProductCategoryListResponse();	
 			BeanUtils.copyProperties(s, category);
-			category.setId(s.getId().toString());
+			category.setId(s.getId());
 			list.add(category);
 			
 		});

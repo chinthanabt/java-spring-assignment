@@ -17,6 +17,10 @@ import com.neurogine.assesment.domain.dto.request.ProductCategoryCreateRequest;
 import com.neurogine.assesment.domain.dto.response.ProductCategoryListResponse;
 import com.neurogine.assesment.service.ProductCategoryService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "Product Category Controller")
 @RestController
 @RequestMapping(value = "/productCategory", produces = { APPLICATION_JSON_VALUE })
 public class ProductCategoryController {
@@ -24,12 +28,14 @@ public class ProductCategoryController {
 	@Autowired
 	ProductCategoryService productCategoryService;
 
+	@ApiOperation(value = "Create Product Category")
 	@PostMapping
 	public ResponseEntity<Void> createCategory(@RequestBody ProductCategoryCreateRequest productCategoryCreateRequest) {
 		productCategoryService.createCategory(productCategoryCreateRequest);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
+	@ApiOperation(value = "List Product Categories")
 	@GetMapping
 	public ResponseEntity<List<ProductCategoryListResponse>> ListAllProductCategory() {		
 		return ResponseEntity.ok(productCategoryService.ListAllProductCategory());
