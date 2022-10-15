@@ -41,7 +41,7 @@ public class ProductCategoryController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
-	@ApiOperation(value = "List Product Categories")
+	@ApiOperation(value = "List All Product Categories")
 	@GetMapping
 	public ResponseEntity<List<ProductCategoryListResponse>> ListAllProductCategory() {		
 		return ResponseEntity.ok(productCategoryService.ListAllProductCategory());

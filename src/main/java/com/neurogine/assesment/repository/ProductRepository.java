@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import com.neurogine.assesment.domain.entity.Product;
 
+
+/**
+ * 
+ * @author Chinthana
+ *
+ */
 @Repository
 public interface ProductRepository extends CrudRepository<Product, UUID> {	
 	Optional<Product> findById(long id);

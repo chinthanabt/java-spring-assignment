@@ -46,7 +46,7 @@ public class ProductController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
-	@ApiOperation(value = "List Products")
+	@ApiOperation(value = "List All Products")
 	@GetMapping
 	public ResponseEntity<List<ProductListResponse>> listProducts() {
 		return ResponseEntity.ok(productService.getAllProducts());

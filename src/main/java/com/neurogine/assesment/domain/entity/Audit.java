@@ -33,6 +33,10 @@ public class Audit extends BaseEntity {
 		this.remark = remark;
 	}
 	
+	public Audit() {
+		
+	}
+	
 	
 	public enum Action {
 		ADD_PRODUCT("ADD_PRODUCT"), DELETE_PRODUCT("DELETE_PRODUCT"),UPDATE_PRODUCT("UPDATE_PRODUCT"),

@@ -98,13 +98,20 @@ public class ProductService {
 				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode()));
 	}
 	
+	@Transactional
 	public void deleteProductById(long id) {	
-		productRepository.delete(productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
-				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode())));
+		
+		Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
+				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode()));
+		
+		//Delete previous images
+		productImageRepository.deleteByProduct(product);
+		//Delete product
+		productRepository.delete(product);
 	}
 	
 	@Transactional
-	public void updateProductById(long id, ProductUpdateRequest productUpdateRequest) {
+	public void updateProductById(long id, ProductUpdateRequest productUpdateRequest) {		
 		Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Constant.Responsecode.PRODUCT_NOT_FOUND.getMessage(),
 				Constant.Responsecode.PRODUCT_NOT_FOUND.getCode()));
 		

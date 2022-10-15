@@ -50,7 +50,7 @@ public class MerchantContoller {
 		 return new ResponseEntity<Void>(HttpStatus.OK);
     }
 	
-	@ApiOperation(value = "List Merchants")
+	@ApiOperation(value = "List All Merchants")
 	@GetMapping
 	public ResponseEntity<List<MerchantListResponse>> listMerchants() {
 		return ResponseEntity.ok(merchantService.getAllMerchants());

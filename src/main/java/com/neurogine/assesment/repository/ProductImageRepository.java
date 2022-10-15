@@ -9,6 +9,11 @@ import com.neurogine.assesment.domain.entity.Product;
 import com.neurogine.assesment.domain.entity.ProductImage;
 
 
+/**
+ * 
+ * @author Chinthana
+ *
+ */
 @Repository
 public interface ProductImageRepository extends CrudRepository<ProductImage, Long>{
 	
