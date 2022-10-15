@@ -16,6 +16,12 @@ import com.neurogine.assesment.exception.InputValidationException;
 import com.neurogine.assesment.exception.ResourceNotFoundException;
 import com.neurogine.assesment.repository.MerchantRepository;
 
+/**
+ * 
+ * @author Chinthana
+ *
+ */
+
 @Service
 public class MerchantService {
 

@@ -22,6 +22,11 @@ import com.neurogine.assesment.service.MerchantService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * 
+ * @author Chinthana
+ *
+ */
 
 @Api(value = "Merchant Contoller")
 @RestController

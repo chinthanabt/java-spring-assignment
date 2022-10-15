@@ -20,6 +20,12 @@ import com.neurogine.assesment.service.ProductCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * 
+ * @author Chinthana
+ *
+ */
+
 @Api(value = "Product Category Controller")
 @RestController
 @RequestMapping(value = "/productCategory", produces = { APPLICATION_JSON_VALUE })
