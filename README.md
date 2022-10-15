@@ -24,8 +24,7 @@ Answer is the product-management-service entire application
 
 
 ##########################Question Three##########################
-http://ec2-44-211-205-98.compute-1.amazonaws.com:8847/swagger-ui
-
+http://ec2-44-211-205-98.compute-1.amazonaws.com:8847/swagger-ui.html
 
 
 ##########################Access In-Memory DB ##########################
